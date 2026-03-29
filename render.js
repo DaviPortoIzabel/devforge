@@ -524,13 +524,13 @@ window.DevForge = window.DevForge || {};
                 </div>
               </div>
             </div>
-            <div class="profile-actions">
-              <button class="segment-button ${mode === "summary" ? "is-active" : ""}" type="button" data-profile-view="summary">Resumo</button>
-              <button class="segment-button ${mode === "full" ? "is-active" : ""}" type="button" data-profile-view="full">Completo</button>
-              ${isOwn ? `<a class="button button--secondary" href="${ctx.linkTo("profile/edit")}">Editar</a>` : `<a class="button button--secondary" href="${ns.profilePath(source.user.username)}">Ver perfil</a>`}
+              <div class="profile-actions">
+                <button class="segment-button ${mode === "summary" ? "is-active" : ""}" type="button" data-profile-view="summary">Resumo</button>
+                <button class="segment-button ${mode === "full" ? "is-active" : ""}" type="button" data-profile-view="full">Completo</button>
+                ${!isOwn ? `<a class="button button--secondary" href="${ns.profilePath(source.user.username)}">Ver perfil</a>` : ""}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
         <section class="panel">
           <div class="segment-control">
