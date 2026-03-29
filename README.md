@@ -23,8 +23,9 @@ Este projeto foi preparado para deploy simples em host Node com disco persistent
 
 1. Importe este repositório no Render.
 2. Escolha `Blueprint` se ele detectar o arquivo `render.yaml`.
-3. Confirme o disco persistente montado em `/var/data`.
-4. O app vai subir com `npm start`.
+3. Use pelo menos o plano `starter`, porque disco persistente nao funciona no `free`.
+4. Confirme o disco persistente montado em `/var/data`.
+5. O app vai subir com `npm start`.
 
 ### Variaveis de ambiente
 
