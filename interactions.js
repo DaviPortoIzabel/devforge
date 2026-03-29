@@ -148,7 +148,7 @@ window.DevForge = window.DevForge || {};
 
     ctx.app.querySelectorAll("[data-close-create-community]").forEach(function bindClose(target) {
       target.addEventListener("click", function handleClose(event) {
-        if (event.target !== target && !event.target.closest("[data-close-create-community]")) {
+        if (!shouldCloseOverlay(event, target, "[data-close-create-community]")) {
           return;
         }
         ctx.state.showCreateCommunity = false;
@@ -201,7 +201,7 @@ window.DevForge = window.DevForge || {};
 
     ctx.app.querySelectorAll("[data-close-members]").forEach(function bindClose(target) {
       target.addEventListener("click", function handleClose(event) {
-        if (event.target !== target && !event.target.closest("[data-close-members]")) {
+        if (!shouldCloseOverlay(event, target, "[data-close-members]")) {
           return;
         }
         ctx.state.showMembersPanel = false;
@@ -312,7 +312,7 @@ window.DevForge = window.DevForge || {};
 
     ctx.app.querySelectorAll("[data-close-preview]").forEach(function bindClose(target) {
       target.addEventListener("click", function handleClose(event) {
-        if (event.target !== target && !event.target.closest("[data-close-preview]")) {
+        if (!shouldCloseOverlay(event, target, "[data-close-preview]")) {
           return;
         }
         ctx.state.previewProfile = null;
@@ -493,5 +493,9 @@ window.DevForge = window.DevForge || {};
   function getFieldValue(card, field) {
     const input = card.querySelector('[data-field="' + field + '"]');
     return input ? input.value.trim() : "";
+  }
+
+  function shouldCloseOverlay(event, backdrop, closeSelector) {
+    return event.target === backdrop || Boolean(event.target.closest("button" + closeSelector));
   }
 })(window.DevForge);
