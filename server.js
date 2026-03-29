@@ -7,7 +7,7 @@ const { DatabaseSync } = require("node:sqlite");
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
-const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : ROOT;
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : (process.env.RENDER ? "/tmp/devforge" : ROOT);
 const DB_PATH = process.env.DB_PATH ? path.resolve(process.env.DB_PATH) : path.join(DATA_DIR, "devforge.db");
 
 const ROUTES = {

@@ -2,15 +2,11 @@ services:
   - type: web
     name: devforge
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: ""
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
         value: 24.0.0
       - key: DATA_DIR
-        value: /var/data
-    disk:
-      name: devforge-data
-      mountPath: /var/data
-      sizeGB: 1
+        value: /tmp/devforge
