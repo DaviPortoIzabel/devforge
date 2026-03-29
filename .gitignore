@@ -1,0 +1,4 @@
+devforge.db
+devforge.db-shm
+devforge.db-wal
+*.log
