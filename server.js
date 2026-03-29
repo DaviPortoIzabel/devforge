@@ -4,10 +4,11 @@ const path = require("node:path");
 const crypto = require("node:crypto");
 const { DatabaseSync } = require("node:sqlite");
 
-const HOST = "127.0.0.1";
+const HOST = process.env.HOST || "0.0.0.0";
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
-const DB_PATH = path.join(ROOT, "devforge.db");
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : ROOT;
+const DB_PATH = process.env.DB_PATH ? path.resolve(process.env.DB_PATH) : path.join(DATA_DIR, "devforge.db");
 
 const ROUTES = {
   "/": "index.html",
@@ -365,6 +366,8 @@ const SEEDED_MESSAGES = [
   { kind: "direct", conversationWith: "marinacosta", authorUsername: "lucassilva", body: "Boa. Quero que cada item tenha imagem, contexto e link quando fizer sentido.", time: "11:28" },
 ];
 
+ensureDataDir();
+
 const db = new DatabaseSync(DB_PATH);
 
 initDatabase();
@@ -397,7 +400,15 @@ const server = http.createServer(async function handleRequest(req, res) {
 server.listen(PORT, HOST, function onListen() {
   console.log(`DevForge em http://${HOST}:${PORT}`);
   console.log("Conta demo: lucassilva / 123456");
+  console.log(`Banco em: ${DB_PATH}`);
 });
+
+function ensureDataDir() {
+  const targetDir = path.dirname(DB_PATH);
+  if (!fs.existsSync(targetDir)) {
+    fs.mkdirSync(targetDir, { recursive: true });
+  }
+}
 
 function initDatabase() {
   db.exec(`
